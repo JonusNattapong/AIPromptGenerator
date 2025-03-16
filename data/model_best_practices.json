@@ -1,0 +1,38 @@
+{
+    "default": {
+      "detailed_format": "Please format your response with headings, bullet points, and examples where appropriate.",
+      "step_instructions": "Please break down your response into clear, sequential steps.",
+      "concise_format": "Please provide a concise answer in 3-5 sentences.",
+      "constraints": "Limit your response to the most essential information based on expert knowledge.",
+      "example_format": "Include at least one practical example to illustrate your point.",
+      "output_format": "Present your answer in a clear, structured format with distinct sections.",
+      "optimization_hint": "Use logical reasoning and provide evidence for your statements."
+    },
+    "chatgpt": {
+      "detailed_format": "Format your answer with ##Headings, *bullet points*, and numerical lists. Include code examples if relevant.",
+      "step_instructions": "Break down your response into numbered steps (1, 2, 3, etc.) with clear instructions at each step.",
+      "concise_format": "Answer briefly and directly in 2-3 sentences maximum.",
+      "constraints": "Stick to verified information and indicate clearly if something is your opinion or speculation.",
+      "example_format": "Provide one concrete example with 'Example:' as a header.",
+      "output_format": "Structure your response with clear sections separated by headers.",
+      "optimization_hint": "You excel at detailed explanations with examples, so include those where possible."
+    },
+    "claude": {
+      "detailed_format": "Please organize your response with clear headings (using Markdown), bulleted lists where appropriate, and separate paragraphs for distinct ideas.",
+      "step_instructions": "Please provide a step-by-step analysis with reasoning at each stage.",
+      "concise_format": "Provide a concise but informative response focusing only on the core question.",
+      "constraints": "Base your response on verifiable information and clearly distinguish facts from interpretations.",
+      "example_format": "Include a relevant example with context to illustrate the main concept.",
+      "output_format": "Format your response with: 1) Summary 2) Main points 3) Examples 4) Conclusion",
+      "optimization_hint": "You excel at nuanced, thoughtful analyses that consider multiple perspectives."
+    },
+    "gemini": {
+      "detailed_format": "Format your response with clear sections, using headings and bullet points for readability.",
+      "step_instructions": "Provide a step-by-step explanation with numbered steps and clear transitions.",
+      "concise_format": "Deliver a concise response that directly answers the question in a few sentences.",
+      "constraints": "Focus on factual information that can be supported by evidence.",
+      "example_format": "Include a practical, real-world example to illustrate the key concepts.",
+      "output_format": "Structure your answer with an initial summary followed by detailed explanation.",
+      "optimization_hint": "You excel at comprehensive knowledge and visual information, so organize information clearly."
+    }
+  }

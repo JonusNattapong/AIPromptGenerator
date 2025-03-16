@@ -1,0 +1,26 @@
+{
+    "default": {
+      "prefix": "",
+      "suffix": "\n\nPlease provide a comprehensive response."
+    },
+    "chatgpt": {
+      "prefix": "",
+      "suffix": "\n\nAnswer using the information provided without making up facts."
+    },
+    "claude": {
+      "prefix": "",
+      "suffix": "\n\nPlease think step-by-step and provide a detailed explanation."
+    },
+    "gemini": {
+      "prefix": "",
+      "suffix": "\n\nProvide accurate, nuanced information addressing all aspects of my query."
+    },
+    "llama": {
+      "prefix": "<s>[INST] ",
+      "suffix": " [/INST]"
+    },
+    "mistral": {
+      "prefix": "<s>[INST] ",
+      "suffix": " [/INST]"
+    }
+  }
