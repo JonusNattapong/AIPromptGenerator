@@ -2,14 +2,31 @@ from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
+import logging
 
 import optimizer
 import models
 import json
 
+# Configure logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Create FastAPI app
 app = FastAPI(title="AI Prompt Generator & Optimizer")
+
+# Set up CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 # Mount static files and templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -44,9 +61,11 @@ async def generate_prompt(request: PromptRequest):
             style=request.style,
             formats=request.formats
         )
+        logging.info(f"Generated prompt: {generated_prompt}")
         return {"status": "success", "prompt": generated_prompt}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logging.error(f"Error generating prompt: {e}")
+        raise HTTPException(status_code=500, detail=f"Error generating prompt: {e}")
 
 @app.post("/api/optimize")
 async def optimize_prompt(request: OptimizeRequest):
@@ -57,22 +76,13 @@ async def optimize_prompt(request: OptimizeRequest):
             target_model=request.target_model,
             optimization_level=request.optimization_level
         )
+        logging.info(f"Optimized prompt: {optimized_prompt}")
         return {"status": "success", "optimized_prompt": optimized_prompt}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/api/test-prompt")
-async def test_prompt(request: OptimizeRequest):
-    """Test a prompt with an AI model from Hugging Face"""
-    try:
-        result = models.test_with_huggingface(
-            prompt=request.prompt,
-            model_type=request.target_model
-        )
-        return {"status": "success", "result": result}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logging.error(f"Error optimizing prompt: {e}")
+        raise HTTPException(status_code=500, detail=f"Error optimizing prompt: {e}")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    models.initialize_models() # Initialize models
+    uvicorn.run(app, host="localhost", port=8000)
