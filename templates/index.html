@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Prompt Generator & Optimizer - Multi-Model Support</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>AI Prompt Generator & Optimizer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
             <h1><i class="fas fa-robot"></i> AI Prompt Generator & Optimizer</h1>
-            <p>Create powerful, optimized prompts for ChatGPT, Claude, Gemini, Gemma, Thai language models, and more</p>
+            <p>Create powerful, optimized prompts for various AI models</p>
         </div>
     </header>
 
@@ -19,8 +19,6 @@
         <div class="tabs">
             <button class="tab-btn active" data-tab="generator">Generate</button>
             <button class="tab-btn" data-tab="optimizer">Optimize</button>
-            <button class="tab-btn" data-tab="test">Test</button>
-            <button class="tab-btn" data-tab="library">Library</button>
         </div>
 
         <div class="tab-content active" id="generator-tab">
@@ -35,13 +33,8 @@
                     <div class="form-group">
                         <label for="target-model">Target AI Model</label>
                         <select id="target-model">
-                            <option value="chatgpt">ChatGPT</option>
-                            <option value="claude">Claude</option>
-                            <option value="gemini">Gemini</option>
-                            <option value="llama">Llama</option>
-                            <option value="mistral">Mistral</option>
                             <option value="gemma">Gemma</option>
-                            <option value="thai">Thai (SCB10X)</option>
+                            <!-- Other models can be added here, but ensure they are supported in models.py -->
                         </select>
                     </div>
 
@@ -63,9 +56,9 @@
                 <div class="form-group checkbox-group">
                     <label>Format Options:</label>
                     <div class="checkbox-container">
-                        <label><input type="checkbox" name="format" value="persona" checked> Include Expert Persona</label>
-                        <label><input type="checkbox" name="format" value="constraints" checked> Include Constraints</label>
-                        <label><input type="checkbox" name="format" value="examples"> Request Examples</label>
+                        <label><input type="checkbox" name="formats" value="persona" checked> Include Expert Persona</label>
+                        <label><input type="checkbox" name="formats" value="constraints" checked> Include Constraints</label>
+                        <label><input type="checkbox" name="formats" value="examples"> Request Examples</label>
                     </div>
                 </div>
 
@@ -76,8 +69,10 @@
                 <h3>Generated Prompt</h3>
                 <div class="result-actions">
                     <button id="copy-generator" class="btn sm"><i class="fas fa-copy"></i> Copy</button>
+                    <!--  Removing save and test buttons for now
                     <button id="save-generator" class="btn sm"><i class="fas fa-save"></i> Save</button>
                     <button id="test-generator" class="btn sm"><i class="fas fa-flask"></i> Test</button>
+                    -->
                 </div>
                 <div class="prompt-output" id="generated-prompt"></div>
             </div>
@@ -92,6 +87,13 @@
                 </div>
 
                 <div class="form-row">
+                    <div class="form-group">
+                        <label for="target-model-optimize">Target AI Model</label>
+                        <select id="target-model-optimize">
+                            <option value="gemma">Gemma</option>
+                             <!-- Other models can be added here, but ensure they are supported in models.py -->
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="optimization-level">Optimization Level</label>
                         <select id="optimization-level">
@@ -109,11 +111,13 @@
                 <h3>Optimized Prompt</h3>
                 <div class="result-actions">
                     <button id="copy-optimizer" class="btn sm"><i class="fas fa-copy"></i> Copy</button>
+                    <!-- Removing save and test buttons for now
                     <button id="save-optimizer" class="btn sm"><i class="fas fa-save"></i> Save</button>
                     <button id="test-optimizer" class="btn sm"><i class="fas fa-flask"></i> Test</button>
+                    -->
                 </div>
                 <div class="prompt-output" id="optimized-prompt"></div>
-                
+
                 <div class="optimization-details">
                     <h4>Optimization Details</h4>
                     <ul id="optimization-notes">
@@ -122,81 +126,16 @@
             </div>
         </div>
 
+        <!-- Removing the Test tab for now
         <div class="tab-content" id="test-tab">
             <h2>Test Prompt</h2>
-            <div class="split-container">
-                <div class="split-left">
-                    <div class="form-group">
-                        <label for="test-prompt">Prompt to Test</label>
-                    <textarea id="test-prompt" rows="10" placeholder="Enter or paste your prompt here (supports Thai)..."></textarea>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="test-model">Model to Test With</label>
-                        <select id="test-model">
-                            <option value="chatgpt">ChatGPT (Simulated)</option>
-                            <option value="claude">Claude (Simulated)</option>
-                            <option value="gemini">Gemini (Simulated)</option>
-                            <option value="llama">Llama</option>
-                            <option value="mistral">Mistral</option>
-                            <option value="gemma">Gemma</option>
-                            <option value="thai">Thai (SCB10X)</option>
-                        </select>
-                    </div>
-
-                    <button id="run-test" class="btn primary"><i class="fas fa-flask"></i> Run Test</button>
-                </div>
-                
-                <div class="split-right">
-                    <div class="loading-container hidden" id="test-loading">
-                        <div class="spinner"></div>
-                        <p>Testing prompt with AI model...</p>
-                    </div>
-                    
-                    <div class="result-container hidden" id="test-result">
-                        <h3>AI Response</h3>
-                        <div class="result-actions">
-                            <button id="copy-test-result" class="btn sm"><i class="fas fa-copy"></i> Copy</button>
-                        </div>
-                        <div class="prompt-output" id="test-response"></div>
-                    </div>
-                </div>
-            </div>
         </div>
+        -->
 
-        <div class="tab-content" id="library-tab">
-            <h2>Prompt Library</h2>
-            <div class="library-controls">
-                <div class="form-group search-group">
-                    <input type="text" id="library-search" placeholder="Search prompts...">
-                    <button class="btn sm" id="search-btn"><i class="fas fa-search"></i></button>
-                </div>
-                <div class="form-group">
-                    <select id="library-filter">
-                        <option value="all">All Models</option>
-                        <option value="chatgpt">ChatGPT</option>
-                        <option value="claude">Claude</option>
-                        <option value="gemini">Gemini</option>
-                        <option value="llama">Llama</option>
-                        <option value="mistral">Mistral</option>
-                        <option value="gemma">Gemma</option>
-                        <option value="thai">Thai (SCB10X)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="library-container">
-                <div class="library-empty">
-                    <p><i class="fas fa-info-circle"></i> Your saved prompts will appear here</p>
-                </div>
-                
-                <!-- Prompt cards will be added here dynamically -->
-                <div id="prompt-cards" class="prompt-cards"></div>
-            </div>
-        </div>
     </main>
 
-    <!-- Modal for saving prompts -->
+    <!-- Removing the Save Modal for now
     <div class="modal" id="save-modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -219,13 +158,120 @@
             </div>
         </div>
     </div>
-
+    -->
     <footer>
         <div class="container">
             <p>&copy; 2025 AI Prompt Generator & Optimizer</p>
         </div>
     </footer>
 
-    <script src="/static/js/main.js"></script>
+    <script>
+        // Tab switching logic
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tab = button.dataset.tab;
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.getElementById(tab + '-tab').classList.add('active');
+                button.classList.add('active');
+            });
+        });
+
+        // Generate Prompt Form Submission
+        document.getElementById('generator-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const goal = document.getElementById('goal').value;
+            const target_model = document.getElementById('target-model').value;
+            const context = document.getElementById('context').value;
+            const style = document.getElementById('style').value;
+            const formats = Array.from(document.querySelectorAll('input[name="formats"]:checked')).map(el => el.value);
+
+            fetch('/api/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    goal: goal,
+                    target_model: target_model,
+                    context: context,
+                    style: style,
+                    formats: formats
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('generated-prompt').textContent = data.prompt;
+                    document.getElementById('generator-result').classList.remove('hidden');
+                } else {
+                    alert('Error generating prompt: ' + data.detail);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error generating prompt. See console for details.');
+            });
+        });
+
+        // Optimize Prompt Form Submission
+        document.getElementById('optimizer-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const existing_prompt = document.getElementById('existing-prompt').value;
+            const target_model = document.getElementById('target-model-optimize').value;
+            const optimization_level = document.getElementById('optimization-level').value;
+
+            fetch('/api/optimize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    prompt: existing_prompt,
+                    target_model: target_model,
+                    optimization_level: optimization_level
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('optimized-prompt').textContent = data.optimized_prompt;
+                    document.getElementById('optimizer-result').classList.remove('hidden');
+                } else {
+                    alert('Error optimizing prompt: ' + data.detail);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error optimizing prompt. See console for details.');
+            });
+        });
+
+        // Copy to Clipboard - Generator
+        document.getElementById('copy-generator').addEventListener('click', function() {
+            const textToCopy = document.getElementById('generated-prompt').textContent;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Prompt copied to clipboard!');
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+
+        // Copy to Clipboard - Optimizer
+        document.getElementById('copy-optimizer').addEventListener('click', function() {
+            const textToCopy = document.getElementById('optimized-prompt').textContent;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Prompt copied to clipboard!');
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+    </script>
 </body>
 </html>
